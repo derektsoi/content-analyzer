@@ -156,26 +156,39 @@ class AutoTagger:
     def generate_tags(self, content: str, url: str = "", title: str = "") -> Dict:
         """Generate tags for content using OpenAI API with zero-shot prompting."""
         
-        system_prompt = """You are an expert content analyst for a cross-border e-commerce company specializing in global shopping and shipping services. 
+        system_prompt = """You are an expert content analyst for a cross-border e-commerce company specializing in global shopping and shipping services.
 
-Analyze blog content and extract relevant tags in these categories:
+Follow this step-by-step process to analyze blog content:
+
+STEP 1: Read the content and identify all mentioned countries/regions
+STEP 2: Distinguish between:
+   - Product Source Regions: Where products are originally sold/manufactured (e.g., US Amazon, UK Lululemon, Japan crafts)
+   - Target User Regions: Which geographical markets/users the content is aimed at (often inferred from domain, shipping mentions, local pricing)
+STEP 3: Extract brands, product categories, and shopping intents
+STEP 4: Assign confidence scores based on clear textual evidence
+STEP 5: Review and validate your findings
+
+Extract tags in these categories:
 1. **Brands**: Specific brand names mentioned (e.g., Lululemon, Amazon, Nike)
 2. **Product Categories**: Product types and categories (e.g., Activewear, Electronics, Books)  
-3. **Source Regions**: Countries/regions where products originate or can be purchased (e.g., UK, US, Japan, Canada)
-4. **Shopping Intent**: Shopping-related themes and purposes (e.g., Price-comparison, How-to-buy, Cross-border-shipping)
+3. **Product Source Regions**: Countries/regions where products originate or are originally sold (e.g., US, UK, Japan)
+4. **Target User Regions**: Geographic markets the content targets (e.g., Singapore, Malaysia)
+5. **Shopping Intent**: Cross-border shopping themes (e.g., Price-comparison, How-to-buy, Cross-border-shipping)
 
-Instructions:
+Critical Guidelines:
+- Distinguish carefully between where products come FROM vs. where users ARE
+- Use domain analysis (.sg = Singapore users, .my = Malaysia users)
+- Look for shipping flow patterns (from X to Y)
 - Extract maximum 5 tags per category
-- Assign confidence scores from 0.0 to 1.0 based on relevance and clarity
+- Assign confidence scores 0.0-1.0 based on textual evidence
 - Only include tags with confidence ≥ 0.3
-- Focus on e-commerce and cross-border shopping context
-- Use consistent, SEO-friendly tag formats (capitalize properly)
 
 Respond with ONLY valid JSON in this exact format:
 {
   "brands": [{"tag": "Brand Name", "confidence": 0.95}],
   "product_categories": [{"tag": "Category Name", "confidence": 0.90}],
-  "source_regions": [{"tag": "Country/Region", "confidence": 0.85}],
+  "product_source_regions": [{"tag": "Source Country", "confidence": 0.85}],
+  "target_user_regions": [{"tag": "Target Market", "confidence": 0.90}],
   "shopping_intent": [{"tag": "Shopping Theme", "confidence": 0.80}]
 }"""
 
