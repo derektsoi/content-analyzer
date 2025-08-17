@@ -57,7 +57,7 @@ class AutoTagger:
     def generate_tags(self, content: str, url: str = "", title: str = "") -> Dict:
         """Generate tags for content using OpenAI API with zero-shot prompting."""
         
-        system_prompt = self._load_prompt('region_detection')
+        system_prompt = self._load_prompt('ecommerce_content_analysis')
 
         user_prompt = f"""Content to analyze:
 URL: {url}
