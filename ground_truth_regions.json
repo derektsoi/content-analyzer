@@ -1,0 +1,116 @@
+{
+  "description": "Ground truth data for testing region detection accuracy in cross-border e-commerce content",
+  "version": "1.0",
+  "test_cases": [
+    {
+      "url": "https://www.buyandship.com.sg/blog/2025/06/04/shop-lululemon-uk-us-ca-ship-to-singapore/",
+      "title": "Shop Lululemon UK/US/CA Ship to Singapore",
+      "expected_results": {
+        "product_source_regions": [
+          {"tag": "US", "reason": "Lululemon US website mentioned for shopping"},
+          {"tag": "UK", "reason": "Lululemon UK website mentioned for shopping"},
+          {"tag": "Canada", "reason": "Lululemon Canada website mentioned for shopping"}
+        ],
+        "target_user_regions": [
+          {"tag": "Singapore", "reason": "buyandship.com.sg domain and 'ship to Singapore' in title"}
+        ],
+        "brands": [
+          {"tag": "Lululemon", "reason": "Primary brand discussed throughout article"}
+        ],
+        "product_categories": [
+          {"tag": "Athleisure", "reason": "Lululemon is athleisure brand"},
+          {"tag": "Activewear", "reason": "Sports and fitness clothing"}
+        ],
+        "shopping_intent": [
+          {"tag": "Price-comparison", "reason": "Article compares prices across regions"},
+          {"tag": "How-to-buy", "reason": "Instructions on how to purchase"},
+          {"tag": "Cross-border-shipping", "reason": "Focus on international shipping"}
+        ]
+      }
+    },
+    {
+      "url": "https://www.buyandship.com.sg/blog/2025/07/21/koreiiwaichiba-where-japanese-craftsmanship-meets-modern-lifestyle/",
+      "title": "Koreiiwaichiba Japanese Craftsmanship",
+      "expected_results": {
+        "product_source_regions": [
+          {"tag": "Japan", "reason": "Japanese crafts and products from Japan"}
+        ],
+        "target_user_regions": [
+          {"tag": "Singapore", "reason": "buyandship.com.sg domain targeting Singapore users"}
+        ],
+        "brands": [
+          {"tag": "Koreiiwaichiba", "reason": "Featured Japanese brand/marketplace"}
+        ],
+        "product_categories": [
+          {"tag": "Japanese Crafts", "reason": "Traditional Japanese handmade items"},
+          {"tag": "Home Goods", "reason": "Household and lifestyle items"}
+        ],
+        "shopping_intent": [
+          {"tag": "Cross-border-shipping", "reason": "International shipping from Japan"},
+          {"tag": "How-to-buy", "reason": "Guide on purchasing Japanese items"}
+        ]
+      }
+    },
+    {
+      "url": "https://www.buyandship.com.sg/blog/2025/08/14/how-to-buy-kindles-singapore/",
+      "title": "How to Buy Kindles Singapore",
+      "expected_results": {
+        "product_source_regions": [
+          {"tag": "US", "reason": "Amazon US website mentioned as source for cheaper Kindles"}
+        ],
+        "target_user_regions": [
+          {"tag": "Singapore", "reason": "buyandship.com.sg domain and 'Singapore' in title"}
+        ],
+        "brands": [
+          {"tag": "Amazon", "reason": "Primary retailer for Kindle devices"},
+          {"tag": "Kobo", "reason": "Alternative e-reader brand mentioned"}
+        ],
+        "product_categories": [
+          {"tag": "E-readers", "reason": "Kindle devices are e-readers"},
+          {"tag": "Electronics", "reason": "Electronic devices category"}
+        ],
+        "shopping_intent": [
+          {"tag": "How-to-buy", "reason": "Step-by-step buying guide"},
+          {"tag": "Cross-border-shipping", "reason": "Shipping from US to Singapore"},
+          {"tag": "Price-comparison", "reason": "Comparing local vs international prices"}
+        ]
+      }
+    },
+    {
+      "url": "https://www.buyandship.com.sg/blog/2025/08/07/how-to-shop-talking-heads-odm-japan-and-ship-to-singapore-chiikawa-merch/",
+      "title": "Shop Talking Heads ODM Japan Chiikawa Merch",
+      "expected_results": {
+        "product_source_regions": [
+          {"tag": "Japan", "reason": "Japanese merchandise from Talking Heads ODM Japan"}
+        ],
+        "target_user_regions": [
+          {"tag": "Singapore", "reason": "buyandship.com.sg domain and 'ship to Singapore' in title"}
+        ],
+        "brands": [
+          {"tag": "Talking Heads", "reason": "Brand/retailer mentioned in title"},
+          {"tag": "Chiikawa", "reason": "Character merchandise brand"}
+        ],
+        "product_categories": [
+          {"tag": "Merchandise", "reason": "Character merchandise and collectibles"},
+          {"tag": "Apparel", "reason": "Clothing items with character designs"},
+          {"tag": "Accessories", "reason": "Character-themed accessories"}
+        ],
+        "shopping_intent": [
+          {"tag": "How-to-buy", "reason": "Guide on purchasing from Japan"},
+          {"tag": "Cross-border-shipping", "reason": "International shipping from Japan to Singapore"}
+        ]
+      }
+    }
+  ],
+  "validation_criteria": {
+    "product_source_regions": "Where products are manufactured, sold originally, or sourced from",
+    "target_user_regions": "Geographic markets the content is written for (often inferred from domain)",
+    "confidence_threshold": 0.3,
+    "max_tags_per_category": 5,
+    "domain_analysis": {
+      ".sg": "Singapore users",
+      ".my": "Malaysia users",
+      ".com": "Global/US users"
+    }
+  }
+}
